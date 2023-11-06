@@ -193,7 +193,7 @@ int main() {
 
 /*
     // Llama a evaluarCosto y almacena el resultado
-    int mejor_solucion = 100000000;  // Puedes ajustar esto según tus necesidades
+    int mejor_solucion = 100000000; 
     vector<SolucionCandidata> solucionesIniciales;
     solucionesIniciales.push_back(solucionInicial);
 
