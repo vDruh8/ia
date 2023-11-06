@@ -62,19 +62,16 @@ SolucionCandidata GenerarSolucionInicialGreedy(const RepresentacionALSP& ALSP) {
 
 
 
-int evaluarCosto(RepresentacionALSP ALSP, vector<SolucionCandidata> solucion_candidata, int mejor_solucion) {
+int evaluarCosto(RepresentacionALSP ALSP, vector<SolucionCandidata> solucion_candidata, int mejor_solucion, int N) {
     int costo_candidato = 0;
 
-
-    for (int i = 0; i < solucion_candidata.size(); i++) {
-        int avion = solucion_candidata[i].avion[0];  // Acceder al primer elemento del vector
-
+    for (int i = 0; i < N; i++) {
+        int avion = solucion_candidata[0].avion[i];  // Acceder al primer elemento del vector
         // Accede a los valores correspondientes en los vectores Ti, gi y hi
-        int tiempo_aterrizaje = solucion_candidata[i].tiempo[0] - ALSP.Ti[avion];
+        int tiempo_aterrizaje = solucion_candidata[0].tiempo[i] - ALSP.Ti[avion];
 
         if (tiempo_aterrizaje <= 0) {
             costo_candidato += -tiempo_aterrizaje * ALSP.gi.at(avion);
-            //std::cout << "costo candidato." << costo_candidato << std.endl;
         } else if (tiempo_aterrizaje > 0) {
             costo_candidato += tiempo_aterrizaje * ALSP.hi.at(avion);
         }
@@ -174,7 +171,7 @@ int main() {
         }
         cout << endl;
     }
-
+    
     SolucionCandidata solucionInicial = GenerarSolucionInicialGreedy(ALSP);
 
     // Imprimir la solución inicial
@@ -191,13 +188,13 @@ int main() {
     }
     cout << endl;
 
-/*
+
     // Llama a evaluarCosto y almacena el resultado
-    int mejor_solucion = 100000000; 
+    int mejor_solucion = 100000000;  // Puedes ajustar esto según tus necesidades
     vector<SolucionCandidata> solucionesIniciales;
     solucionesIniciales.push_back(solucionInicial);
 
-    int costo = evaluarCosto(ALSP, solucionesIniciales, mejor_solucion);
+    int costo = evaluarCosto(ALSP, solucionesIniciales, mejor_solucion, N);
 
     // Imprime el resultado
     if (costo >= 0) {
@@ -205,7 +202,7 @@ int main() {
     } else {
         std::cout << "La solución no es factible." << costo << std::endl;
     }
-*/
+
     // Cierra el archivo después de usarlo.
     inputFile.close();
 
